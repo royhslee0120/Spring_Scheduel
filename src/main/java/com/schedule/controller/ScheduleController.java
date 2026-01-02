@@ -30,17 +30,25 @@ public class ScheduleController {
 
     @GetMapping("/schedules/{scheduleId}")
     public ResponseEntity<ScheduleGetResponse> getOne(
-            @PathVariable long scheduleId
+            @PathVariable Long scheduleId
     ) {
         return ResponseEntity.status(HttpStatus.OK).body(scheduleService.findOne(scheduleId));
     }
 
     @PutMapping("/schedules/{scheduleId}")
     public ResponseEntity<ScheduleUpdateResponse> update(
-            @PathVariable long scheduleId,
+            @PathVariable Long scheduleId,
             @RequestBody ScheduleUpdateRequest request
     ) {
         return ResponseEntity.status(HttpStatus.OK).body(scheduleService.update(scheduleId, request));
+    }
+
+    @DeleteMapping("/schedules/{scheduleId}")
+    public void delete(
+            @PathVariable Long scheduleId,
+            @RequestParam String password
+    ) {
+        scheduleService.delete(scheduleId, password);
     }
 
 }
