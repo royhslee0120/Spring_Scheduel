@@ -1,8 +1,6 @@
 package com.schedule.service;
 
-import com.schedule.dto.ScheduleCreateRequest;
-import com.schedule.dto.ScheduleCreateResponse;
-import com.schedule.dto.ScheduleGetResponse;
+import com.schedule.dto.*;
 import com.schedule.entity.Schedule;
 import com.schedule.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
@@ -57,6 +55,28 @@ public class ScheduleService {
                 () -> new IllegalStateException("존재하지 않는 일정입니다.")
         );
         return new ScheduleGetResponse(
+                schedule.getId(),
+                schedule.getTitle(),
+                schedule.getContent(),
+                schedule.getAuthorName(),
+                schedule.getCreatedAt(),
+                schedule.getModifiedAt()
+        );
+    }
+
+    @Transactional(readOnly = true)
+    public ScheduleUpdateResponse update(long scheduleId, ScheduleUpdateRequest request) {
+        Schedule schedule = scheduleRepository.findById(scheduleId).orElseThrow(
+                () -> new IllegalStateException("존재하지 않는 일정입니다.")
+        );
+
+        if (!schedule.getPassword().equals(request.getPassword())) {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+        }
+
+        schedule.update(request.getTitle(), request.getAuthorName());
+
+        return new ScheduleUpdateResponse(
                 schedule.getId(),
                 schedule.getTitle(),
                 schedule.getContent(),
