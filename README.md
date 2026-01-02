@@ -55,3 +55,6 @@ erDiagram
 - CRUD 필수 기능은 모두 데이터베이스 연결 및 `JPA`를 사용해서 개발해야 합니다.
 - 일정 작성, 수정, 조회 시 반환 받은 일정 정보에 `비밀번호`는 제외해야 합니다.
 - 일정 수정, 삭제 시 선택한 일정의 `비밀번호`와 요청할 때 함께 보낸 `비밀번호`가 일치할 경우에만 가능합니다.
+
+
+<img width="765" height="999" alt="image" src="https://github.com/user-attachments/assets/7f0599f5-2bfa-4db8-a885-3822324a9135" />
