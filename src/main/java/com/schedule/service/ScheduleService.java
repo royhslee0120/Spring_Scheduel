@@ -19,7 +19,12 @@ public class ScheduleService {
 
     @Transactional
     public ScheduleCreateResponse save(ScheduleCreateRequest request) {
-        Schedule schedule = new Schedule(request.getTitle());
+        Schedule schedule = new Schedule(
+                request.getTitle(),
+                request.getContent(),
+                request.getAuthorName(),
+                request.getPassword()
+        );
         Schedule savedSchedule = scheduleRepository.save(schedule);
         return new ScheduleCreateResponse(
                 savedSchedule.getId(),
@@ -64,7 +69,7 @@ public class ScheduleService {
         );
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public ScheduleUpdateResponse update(long scheduleId, ScheduleUpdateRequest request) {
         Schedule schedule = scheduleRepository.findById(scheduleId).orElseThrow(
                 () -> new IllegalStateException("존재하지 않는 일정입니다.")

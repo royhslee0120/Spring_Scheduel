@@ -19,8 +19,11 @@ public class Schedule extends BaseEntity {
     private String authorName; // 작성자명
     private String password; // 비밀번호 (응답 제외)
 
-    public Schedule(String title) {
+    public Schedule(String title, String content, String authorName, String password) {
         this.title = title;
+        this.content = content;
+        this.authorName = authorName;
+        this.password = password;
     }
 
     public void update(String title, String authorName) {
