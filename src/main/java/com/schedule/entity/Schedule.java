@@ -9,9 +9,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "schedules")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Schedule extends BaseEntity{
+public class Schedule extends BaseEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String title; // 일정 제목
     private String content; // 일정 내용
@@ -20,5 +21,10 @@ public class Schedule extends BaseEntity{
 
     public Schedule(String title) {
         this.title = title;
+    }
+
+    public void update(String title, String authorName) {
+        this.title = title;
+        this.authorName = authorName;
     }
 }
